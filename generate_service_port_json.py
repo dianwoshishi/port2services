@@ -3,6 +3,8 @@ import re
 import json
 import requests
 
+import yaml
+
 # url = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"
 
 service_names_port_number = "service-names-port-numbers.csv"
@@ -43,6 +45,15 @@ with open(service_names_port_number, "r") as f:
 						# print(line, e)
 						continue
 
-json_port_description = json.dumps(port_description)
-print(json_port_description)
+def write_json(port_description):
+	json_port_description = json.dumps(port_description)
+	print(json_port_description)
 
+write_json(port_description)
+
+
+def write_yaml(port_description, outputfile):
+	with open(outputfile, 'w') as file:
+		yaml.dump(port_description, file)
+
+write_yaml(port_description, "service-names-port-numbers.csv.yml")
